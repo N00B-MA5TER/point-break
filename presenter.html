@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Point Break — Live Control</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="presenter.css" />
+</head>
+<body>
+
+  <div class="eclipse" aria-hidden="true"></div>
+
+  <!-- ═════════ PROBLEM BOARD (organizer home) ═════════ -->
+  <section id="boardView" class="view">
+    <header class="bd-top">
+      <div class="brand">
+        <div class="brand-name">POINT <b>BREAK</b></div>
+        <div class="brand-sub">LIVE CONTROL · <span id="bdCount">0 / 0 COMPLETE</span></div>
+      </div>
+      <div class="timer-slot" aria-live="off"></div>
+      <div class="bd-actions no-fs">
+        <button class="link" id="btnProjector" title="Open a clean audience window for the projector">Projector window</button>
+        <button class="link" id="btnFsBoard">Fullscreen <kbd>F</kbd></button>
+        <button class="link" id="btnKeysBoard">Keys <kbd>?</kbd></button>
+        <button class="link danger" id="btnReset">Reset event</button>
+        <a class="link" href="index.html">Event page</a>
+      </div>
+    </header>
+
+    <main class="bd-main">
+      <div class="grid" id="gridPrimary"></div>
+      <div class="sec-title" id="backupTitle"><span>BACKUP</span></div>
+      <div class="grid" id="gridBackup"></div>
+    </main>
+  </section>
+
+  <!-- ═════════ LIVE PROBLEM VIEW (projected) ═════════ -->
+  <section id="stageView" class="view" hidden>
+    <nav class="prog" id="prog" aria-label="Stage progress"></nav>
+
+    <header class="pv-head">
+      <div class="ph-left">
+        <span class="ph-num" id="phNum">01</span>
+        <span class="ph-title" id="phTitle"></span>
+        <span class="ph-badge" id="phBadge" hidden>BACKUP</span>
+      </div>
+      <div class="timer-slot"></div>
+      <div class="ph-team" id="phTeam"></div>
+    </header>
+
+    <main class="pv-main" id="pvMain"></main>
+
+    <aside class="ps-side cmp" id="psSide" hidden aria-label="Full problem statement"></aside>
+
+    <footer class="pv-foot"><span>POINT <b>BREAK</b></span><span id="pfDots"></span><span>ECLIPSE · DIATM</span></footer>
+  </section>
+
+  <!-- auto-hiding organizer dock -->
+  <div class="dock" id="ctl" hidden></div>
+
+  <!-- ═════════ ORGANIZER DRAWER (private) ═════════ -->
+  <aside id="drawer" class="drawer" aria-hidden="true" role="dialog" aria-label="Organizer panel">
+    <div class="dr-head">
+      <div>
+        <div class="dr-lock">🔒 ORGANIZER ONLY — NEVER SHOW ON PROJECTOR</div>
+        <div class="dr-title" id="drTitle"></div>
+      </div>
+      <button class="btn ghost" id="drClose" aria-label="Close organizer panel">✕ <kbd>ESC</kbd></button>
+    </div>
+    <div class="dr-tabs" role="tablist" id="drTabs">
+      <button role="tab" data-tab="key" class="secret">KEY</button>
+      <button role="tab" data-tab="lock">LOCK</button>
+      <button role="tab" data-tab="score" class="secret">SCORE</button>
+      <button role="tab" data-tab="timer">TIMER</button>
+      <button role="tab" data-tab="team">TEAM</button>
+    </div>
+    <div class="dr-body" id="drBody"></div>
+  </aside>
+
+  <!-- ═════════ TWIST TRANSITION ═════════ -->
+  <div id="twistFx" class="twist-fx" aria-hidden="true"></div>
+
+  <!-- ═════════ MODALS ═════════ -->
+  <div class="modal" id="modalReset" hidden role="alertdialog" aria-modal="true" aria-labelledby="mrTitle">
+    <div class="modal-card danger">
+      <div class="m-title" id="mrTitle">RESET ENTIRE EVENT?</div>
+      <p>This permanently clears <b>all team numbers and names, problem progress, scores and timer</b> saved in this browser. This cannot be undone.</p>
+      <div class="m-actions">
+        <button class="btn ghost" id="mrCancel">CANCEL</button>
+        <button class="btn danger" id="mrOk">YES — RESET EVERYTHING</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modalKeys" hidden role="dialog" aria-modal="true" aria-labelledby="mkTitle">
+    <div class="modal-card">
+      <div class="m-title" id="mkTitle">KEYBOARD SHORTCUTS</div>
+      <ul class="keylist">
+        <li><kbd>←</kbd> <kbd>→</kbd><span>Previous / next stage</span></li>
+        <li><kbd>T</kbd><span>Timer panel (organizer)</span></li>
+        <li><kbd>[</kbd> <kbd>]</kbd><span>Previous / next team (problem)</span></li>
+        <li><kbd>H</kbd><span>Back to problem board</span></li>
+        <li><kbd>F</kbd><span>Fullscreen (clean audience view)</span></li>
+        <li><kbd>P</kbd><span>Show / hide the full problem sidebar</span></li>
+        <li><kbd>L</kbd><span>Record &amp; lock the team’s decision</span></li>
+        <li><kbd>K</kbd><span>Organizer key (private panel)</span></li>
+        <li><kbd>J</kbd><span>Judging scores (private panel)</span></li>
+        <li><kbd>Space</kbd><span>Start / pause timer</span></li>
+        <li><kbd>ESC</kbd><span>Close panel / dialog</span></li>
+        <li><kbd>?</kbd><span>This list</span></li>
+      </ul>
+      <p class="m-note">Nothing here can reset the event — that needs the on-screen RESET EVENT button and a confirmation.</p>
+      <div class="m-actions"><button class="btn" id="mkOk">GOT IT</button></div>
+    </div>
+  </div>
+
+  <script src="presenter-data.js"></script>
+  <script src="presenter.js"></script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Point Break — Think. Decide. Adapt. Reconsider.</title>
+  <meta name="description" content="Point Break is a two-day critical thinking event where teams solve problems, make decisions, and adapt when everything changes. Are you ready?" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/jpeg" href="eclipse-logo.jpg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="eclipse" aria-hidden="true"></div>
+
+
+
+  <!-- ── NAV ── -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" id="navLogo" aria-label="Point Break by ECLIPSE — back to top">
+        <img src="eclipse-logo.jpg" alt="ECLIPSE" class="logo-img" width="200" height="56" />
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" class="nav-link">The Point</a></li>
+        <li><a href="#flow" class="nav-link">Event Flow</a></li>
+        <li><a href="#judging" class="nav-link">Judging</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+      </ul>
+      <a href="presenter.html" class="nav-cta" id="navR1">Round 1</a>
+      <a href="round2.html" class="nav-cta nav-cta--2" id="navR2">Round 2</a>
+      <button class="nav-fs" id="navFs" type="button" aria-label="Toggle fullscreen (F)" title="Fullscreen (F)">⛶</button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile" id="navMobile">
+      <a href="#about" class="nav-mobile-link">The Point</a>
+      <a href="#flow" class="nav-mobile-link">Event Flow</a>
+      <a href="#judging" class="nav-mobile-link">Judging</a>
+      <a href="#faq" class="nav-mobile-link">FAQ</a>
+      <a href="presenter.html" class="nav-mobile-cta">Round 1 →</a>
+      <a href="round2.html" class="nav-mobile-cta">Round 2 →</a>
+      <button class="nav-mobile-fs" id="navFsMobile" type="button">⛶ Fullscreen</button>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero" id="hero">
+
+
+    <div class="hero-content">
+      <div class="hero-eyebrow" data-reveal>
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow-text">ECLIPSE · DIATM · Critical Thinking Event</span>
+        <span class="eyebrow-line"></span>
+      </div>
+
+      <h1 class="hero-title" data-reveal>
+        <span class="hero-title-word" id="titleWord1">Point</span>
+        <span class="hero-title-break" id="titleBreak">
+          <span class="crack-line"></span>
+          <span class="crack-glow"></span>
+        </span>
+        <span class="hero-title-word hero-title-accent" id="titleWord2">Break</span>
+      </h1>
+
+      <p class="hero-tagline" data-reveal>
+        What happens when you think you have the answer,<br class="tagline-br" />
+        and then <em>something changes?</em>
+      </p>
+
+      <div class="hero-meta" data-reveal>
+        <span><i>Dates</i>6th &amp; 7th October 2026</span>
+        <span><i>Time</i>2:00 PM onwards</span>
+        <span><i>Venue</i>Lab 225, DIATM</span>
+        <span><i>Teams</i>3–4 members</span>
+      </div>
+
+      <div class="hero-pillars" data-reveal>
+        <span class="pillar-chip">Think</span>
+        <span class="pillar-dot">·</span>
+        <span class="pillar-chip">Decide</span>
+        <span class="pillar-dot">·</span>
+        <span class="pillar-chip">Adapt</span>
+        <span class="pillar-dot">·</span>
+        <span class="pillar-chip">Reconsider</span>
+      </div>
+
+      <div class="hero-actions" data-reveal>
+        <a href="presenter.html" class="btn btn-primary" id="heroRound1Btn">
+          <span class="btn-text">Round 1</span>
+          <span class="btn-arrow">→</span>
+        </a>
+        <a href="round2.html" class="btn btn-primary btn-alt" id="heroRound2Btn">
+          <span class="btn-text">Round 2</span>
+          <span class="btn-arrow">→</span>
+        </a>
+        <a href="#about" class="btn btn-ghost" id="heroLearnBtn">
+          <span class="btn-text">What is this?</span>
+        </a>
+      </div>
+    </div>
+</section>
+
+  <!-- ── TICKER ── -->
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-track" id="tickerTrack">
+      <span>Think</span><span class="ticker-sep">✦</span>
+      <span>Decide</span><span class="ticker-sep">✦</span>
+      <span>Adapt</span><span class="ticker-sep">✦</span>
+      <span>Reconsider</span><span class="ticker-sep">✦</span>
+      <span>Point Break</span><span class="ticker-sep">✦</span>
+      <span>Critical Thinking</span><span class="ticker-sep">✦</span>
+      <span>Think</span><span class="ticker-sep">✦</span>
+      <span>Decide</span><span class="ticker-sep">✦</span>
+      <span>Adapt</span><span class="ticker-sep">✦</span>
+      <span>Reconsider</span><span class="ticker-sep">✦</span>
+      <span>Point Break</span><span class="ticker-sep">✦</span>
+      <span>Critical Thinking</span><span class="ticker-sep">✦</span>
+    </div>
+  </div>
+
+  <!-- ── ABOUT ── -->
+  <section class="about section" id="about">
+    <div class="container">
+      <div class="section-label" data-reveal>01 / The Point</div>
+      <div class="about-grid">
+        <div class="about-left" data-reveal>
+          <h2 class="section-title">Not just about<br /><span class="accent">finding answers.</span></h2>
+          <p class="about-lead about-lead--small">Point Break tests what you do when your answer stops being enough.</p>
+        </div>
+        <ol class="point-list">
+          <li data-reveal><b>There is no single “correct” answer.</b><span>What matters is how you understand the problem and justify your choices.</span></li>
+          <li data-reveal><b>Every problem changes halfway.</b><span>You solve it, then a twist breaks something you relied on.</span></li>
+          <li data-reveal><b>You adapt or defend.</b><span>Change your plan — or prove why it still holds. Both can be right.</span></li>
+          <li data-reveal><b>Real situations.</b><span>Inspired by hackathons, projects and decisions our members have actually faced.</span></li>
+          <li data-reveal><b>No prior knowledge needed.</b><span>It is about how you think under pressure, not what you already know.</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONCEPT BREAK ── -->
+  <div class="concept-break" data-reveal>
+    <div class="concept-line"></div>
+    <div class="concept-center">
+      <p class="concept-quote">"Point Break is not just about finding an answer.<br />It is about what you do when the answer stops being enough."</p>
+    </div>
+    <div class="concept-line"></div>
+  </div>
+
+  <!-- ── ROUNDS ── -->
+  <section class="flow section" id="flow">
+    <div class="container">
+      <div class="section-label" data-reveal>02 / Event Flow</div>
+      <h2 class="section-title centered" data-reveal>The <span class="accent">roadmap.</span></h2>
+      <p class="rounds-intro" data-reveal>6th &amp; 7th October 2026 · 2:00 PM onwards · Lab 225, DIATM · Teams of 3–4</p>
+
+      <div class="roadmap">
+        <!-- ROUND 1 -->
+        <div class="rm-round" data-reveal>
+          <div class="rm-head"><span class="rm-tag">Round 01</span><a href="presenter.html" class="rm-link">Open Round 1 →</a></div>
+          <ol class="rm-steps">
+            <li><i>01</i><div><b>Teams are formed</b></div></li>
+            <li><i>02</i><div><b>Problems are assigned</b></div></li>
+            <li class="rm-core"><i>03</i><div><b>The Problem</b><span>You receive a problem statement</span></div></li>
+            <li class="rm-core"><i>04</i><div><b>The Solution</b><span>You present your plan</span></div></li>
+            <li class="rm-core rm-twist"><i>⚡</i><div><b>The Twist</b><span>New information changes everything</span></div></li>
+            <li class="rm-core"><i>05</i><div><b>The Fix</b><span>Adapt or defend your solution</span></div></li>
+            <li class="rm-gate"><i>▲</i><div><b>Shortlisted teams move to Round 2</b></div></li>
+          </ol>
+        </div>
+
+        <!-- ROUND 2 -->
+        <div class="rm-round rm-round--2" data-reveal>
+          <div class="rm-head"><span class="rm-tag rm-tag--2">Round 02</span><a href="round2.html" class="rm-link">Open Round 2 →</a></div>
+          <div class="rm-secret" aria-label="Undisclosed">
+            <div class="rm-bars" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+            <div class="rm-secret-t">UNDISCLOSED</div>
+            <p>Only shortlisted teams will find out.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PILLARS ── -->
+  <section class="judging section" id="judging">
+    <div class="container">
+      <div class="section-label" data-reveal>03 / How You Are Judged</div>
+      <h2 class="section-title centered" data-reveal>Four <span class="accent">criteria.</span></h2>
+      <div class="judge-grid">
+        <div class="judge-card" data-reveal>
+          <div class="jc-score">10</div>
+          <h3>Understanding the Problem</h3>
+          <p>Did you grasp what is really being asked — including every constraint?</p>
+        </div>
+        <div class="judge-card" data-reveal>
+          <div class="jc-score">10</div>
+          <h3>Reasoning &amp; Trade-offs</h3>
+          <p>Can you justify your choice, and say clearly what you gave up for it?</p>
+        </div>
+        <div class="judge-card" data-reveal>
+          <div class="jc-score">10</div>
+          <h3>Adaptation to Twist</h3>
+          <p>When the situation changes, can you adapt — or defend — your plan with good reasons?</p>
+        </div>
+        <div class="judge-card" data-reveal>
+          <div class="jc-score">10</div>
+          <h3>Communication</h3>
+          <p>Can you explain your thinking clearly to the room?</p>
+        </div>
+      </div>
+      <p class="judge-note" data-reveal>Each criterion is scored out of 10. Finding the “intended” answer is not one of them.</p>
+    </div>
+  </section>
+
+  <!-- ── MYSTERY SECTION ── -->
+  <section class="mystery section" id="mystery">
+    <div class="mystery-inner container">
+      <div class="mystery-badge" data-reveal>Intentionally Unknown</div>
+      <h2 class="mystery-title" data-reveal>
+        We're not telling you<br /><span class="accent">what's coming.</span>
+      </h2>
+      <p class="mystery-desc" data-reveal>
+        The challenge formats, the twists, the information-based mechanics — all of it stays undisclosed until you're in the room. That's not a teaser. That's the point.
+      </p>
+      <p class="mystery-desc" data-reveal>
+        Point Break is designed so that participants experience every element for the very first time during the event. Preparation here doesn't mean knowing the questions. It means sharpening your ability to think.
+      </p>
+      <div class="mystery-cards" data-reveal>
+        <div class="mystery-card" id="mCard1">
+          <div class="mystery-card-icon">?</div>
+          <p>Challenge Format</p>
+        </div>
+        <div class="mystery-card" id="mCard2">
+          <div class="mystery-card-icon">?</div>
+          <p>The Twists</p>
+        </div>
+        <div class="mystery-card" id="mCard3">
+          <div class="mystery-card-icon">?</div>
+          <p>Information Sources</p>
+        </div>
+        <div class="mystery-card" id="mCard4">
+          <div class="mystery-card-icon">?</div>
+          <p>Scoring Criteria</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section class="faq section" id="faq">
+    <div class="container">
+      <div class="section-label" data-reveal>05 / FAQ</div>
+      <h2 class="section-title centered" data-reveal>Common Questions</h2>
+      <div class="faq-list" id="faqList">
+
+        <div class="faq-item" data-reveal>
+          <button class="faq-question" aria-expanded="false">
+            <span>Do we need to register as a team?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No — teams are formed during the event itself. You register as an individual and build your team on Day 1.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-reveal>
+          <button class="faq-question" aria-expanded="false">
+            <span>What background do participants need?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>None specific. Point Break is about how you think, not what you already know. The challenges are designed to be accessible while still being genuinely difficult for any background.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-reveal>
+          <button class="faq-question" aria-expanded="false">
+            <span>Can I prepare for the challenges in advance?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>We intentionally keep the challenge formats undisclosed. The best preparation is practicing how you think — working through unfamiliar problems, explaining your reasoning out loud, and being comfortable reconsidering your approach.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-reveal>
+          <button class="faq-question" aria-expanded="false">
+            <span>Is there a "correct" answer to the challenges?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Not necessarily. What matters is your process — how you understood the problem, what decisions you made, how you justified them, and how you adapted when the situation changed. Multiple approaches can be valid.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-reveal>
+          <button class="faq-question" aria-expanded="false">
+            <span>Who organises Point Break?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Point Break is organized by ECLIPSE — The Tech Community of DIATM. The challenges are inspired by real situations that our members have faced in hackathons, competitions, and collaborative projects.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <img src="eclipse-logo.jpg" alt="ECLIPSE" class="logo-img logo-img--foot" width="200" height="56" />
+        <p class="footer-tagline">Point Break — Think. Pivot. Survive.</p>
+      </div>
+      <div class="footer-right">
+        <p class="footer-copy"><a href="presenter.html">Round 1</a> · <a href="round2.html">Round 2</a></p>
+        <p class="footer-copy footer-copy--muted">Organised by ECLIPSE — The Tech Community of DIATM</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

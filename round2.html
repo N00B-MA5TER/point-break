@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Point Break — Round 02 · The Break</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="round2.css" />
+</head>
+<body class="t-pre">
+
+  <div class="eclipse" aria-hidden="true"></div>
+
+  <div id="app">
+    <!-- header: organizer sees the selectors, the projector sees plain text -->
+    <header class="hd">
+      <div class="hd-brand">
+        <div class="hd-name">POINT <b>BREAK</b></div>
+        <div class="hd-sub">ROUND 02 · THE BREAK</div>
+      </div>
+
+      <div class="hd-mid">
+        <div class="hd-sel no-fs">
+          <label><span>TEAM</span><select id="selTeam" aria-label="Team"></select></label>
+          <label><span>PROBLEM</span><select id="selProb" aria-label="Problem"></select></label>
+        </div>
+        <div class="hd-ctx only-fs" id="hdCtx"></div>
+      </div>
+
+      <div class="hd-right">
+        <div class="timer-slot" aria-live="off"></div>
+        <div class="hd-phase" id="hdPhase"></div>
+      </div>
+    </header>
+
+    <nav class="ph" id="phases" aria-label="Phase"></nav>
+
+    <main class="stage" id="stage"></main>
+
+    <footer class="foot"><span>POINT <b>BREAK</b></span><span id="ftTag">YOU TRUSTED THE INFORMATION. NOW PROVE THAT YOU KNEW WHAT TO TRUST.</span><span>ECLIPSE · DIATM</span></footer>
+  </div>
+
+  <!-- organizer dock (auto-hides) -->
+  <div class="dock" id="dock"></div>
+
+  <!-- organizer drawer: never rendered in presentation / projector mode -->
+  <aside class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-label="Organizer panel">
+    <div class="dr-head">
+      <div>
+        <div class="dr-lock">🔒 ORGANIZER ONLY — NEVER SHOW ON THE PROJECTOR</div>
+        <div class="dr-title" id="drTitle"></div>
+      </div>
+      <button class="btn ghost" id="drClose" aria-label="Close organizer panel">✕ <kbd>ESC</kbd></button>
+    </div>
+    <div class="dr-tabs" role="tablist" id="drTabs">
+      <button role="tab" data-tab="key" class="secret">KEY</button>
+      <button role="tab" data-tab="life">LIFELINES</button>
+      <button role="tab" data-tab="text" class="secret">NOTES</button>
+      <button role="tab" data-tab="score" class="secret">SCORE</button>
+      <button role="tab" data-tab="timer">TIMER</button>
+      <button role="tab" data-tab="setup">SETUP</button>
+    </div>
+    <div class="dr-body" id="drBody"></div>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- THE BREAK cinematic overlay -->
+  <div id="fx" class="fx" aria-hidden="true"></div>
+
+  <!-- lifeline picker (L) -->
+  <div class="modal" id="modalLife" hidden role="dialog" aria-modal="true" aria-labelledby="mlTitle">
+    <div class="modal-card wide">
+      <div class="m-title" id="mlTitle">LIFELINES</div>
+      <div class="ll-grid" id="llGrid"></div>
+      <div class="m-actions"><button class="btn ghost" id="mlClose">CLOSE <kbd>ESC</kbd></button></div>
+    </div>
+  </div>
+
+  <div class="modal" id="modalKeys" hidden role="dialog" aria-modal="true" aria-labelledby="mkTitle">
+    <div class="modal-card">
+      <div class="m-title" id="mkTitle">KEYBOARD SHORTCUTS</div>
+      <ul class="keylist">
+        <li><span><kbd>←</kbd> <kbd>→</kbd></span><span>Previous / next phase</span></li>
+        <li><span><kbd>Space</kbd></span><span>Start / pause timer</span></li>
+        <li><span><kbd>B</kbd></span><span>Trigger THE BREAK</span></li>
+        <li><span><kbd>T</kbd></span><span>Timer panel (organizer)</span></li>
+        <li><span><kbd>L</kbd></span><span>Open lifelines</span></li>
+        <li><span><kbd>Enter</kbd></span><span>Confirm the lifeline in use</span></li>
+        <li><span><kbd>R</kbd></span><span>Reveal reality</span></li>
+        <li><span><kbd>[</kbd> <kbd>]</kbd></span><span>Previous / next team</span></li>
+        <li><span><kbd>K</kbd></span><span>Organizer panel (answers, scores)</span></li>
+        <li><span><kbd>F</kbd></span><span>Fullscreen / presentation mode</span></li>
+        <li><span><kbd>Esc</kbd></span><span>Close panel · cancel a lifeline</span></li>
+        <li><span><kbd>?</kbd></span><span>This list</span></li>
+      </ul>
+      <div class="m-actions"><button class="btn" id="mkOk">GOT IT</button></div>
+    </div>
+  </div>
+
+  <div class="modal" id="modalReset" hidden role="alertdialog" aria-modal="true" aria-labelledby="mrTitle">
+    <div class="modal-card danger">
+      <div class="m-title" id="mrTitle">RESET ALL OF ROUND 2?</div>
+      <p>This permanently clears team names, every team’s progress, lifelines used, scores, notes and any outcomes you typed. It cannot be undone.</p>
+      <div class="m-actions">
+        <button class="btn ghost" id="mrCancel">CANCEL</button>
+        <button class="btn danger" id="mrOk">YES — RESET EVERYTHING</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="round2-data.js"></script>
+  <script src="round2.js"></script>
+</body>
+</html>

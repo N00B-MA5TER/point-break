@@ -30,7 +30,7 @@
         <li><a href="#faq" class="nav-link">FAQ</a></li>
       </ul>
       <a href="presenter.html" class="nav-cta" id="navR1">Round 1</a>
-      <a href="round2.html" class="nav-cta nav-cta--2" id="navR2">Round 2</a>
+      <a href="round2.html" class="nav-cta nav-cta--2" id="navR2" data-round2>Round 2</a>
       <button class="nav-fs" id="navFs" type="button" aria-label="Toggle fullscreen (F)" title="Fullscreen (F)">⛶</button>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
@@ -42,7 +42,7 @@
       <a href="#judging" class="nav-mobile-link">Judging</a>
       <a href="#faq" class="nav-mobile-link">FAQ</a>
       <a href="presenter.html" class="nav-mobile-cta">Round 1 →</a>
-      <a href="round2.html" class="nav-mobile-cta">Round 2 →</a>
+      <a href="round2.html" class="nav-mobile-cta" data-round2>Round 2 →</a>
       <button class="nav-mobile-fs" id="navFsMobile" type="button">⛶ Fullscreen</button>
     </div>
   </nav>
@@ -94,7 +94,7 @@
           <span class="btn-text">Round 1</span>
           <span class="btn-arrow">→</span>
         </a>
-        <a href="round2.html" class="btn btn-primary btn-alt" id="heroRound2Btn">
+        <a href="round2.html" class="btn btn-primary btn-alt" id="heroRound2Btn" data-round2>
           <span class="btn-text">Round 2</span>
           <span class="btn-arrow">→</span>
         </a>
@@ -176,7 +176,7 @@
 
         <!-- ROUND 2 -->
         <div class="rm-round rm-round--2" data-reveal>
-          <div class="rm-head"><span class="rm-tag rm-tag--2">Round 02</span><a href="round2.html" class="rm-link">Open Round 2 →</a></div>
+          <div class="rm-head"><span class="rm-tag rm-tag--2">Round 02</span><a href="round2.html" class="rm-link" data-round2>Open Round 2 →</a></div>
           <div class="rm-secret" aria-label="Undisclosed">
             <div class="rm-bars" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
             <div class="rm-secret-t">UNDISCLOSED</div>
@@ -323,12 +323,13 @@
         <p class="footer-tagline">Point Break — Think. Pivot. Survive.</p>
       </div>
       <div class="footer-right">
-        <p class="footer-copy"><a href="presenter.html">Round 1</a> · <a href="round2.html">Round 2</a></p>
+        <p class="footer-copy"><a href="presenter.html">Round 1</a> · <a href="round2.html" data-round2>Round 2</a></p>
         <p class="footer-copy footer-copy--muted">Organised by ECLIPSE — The Tech Community of DIATM</p>
       </div>
     </div>
   </footer>
 
+  <script src="site-config.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

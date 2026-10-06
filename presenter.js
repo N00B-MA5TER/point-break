@@ -693,8 +693,10 @@
   function toggleSecretHint() { openDrawer('team'); }   // K / J on a presenting device: just open the safe panel
 
   function openDrawer(tab) {
-    if (PUBLIC || S.openId == null) return;
-    if (secretsHidden() && isSecretTab(tab || drawerTab)) tab = 'timer';
+    if (PUBLIC) return;
+    const board = S.openId == null;                         // on the problem board only TIMER and SETUP apply
+    if (board) tab = tab === 'timer' ? 'timer' : 'setup';
+    else if (secretsHidden() && isSecretTab(tab || drawerTab)) tab = 'timer';
     drawerOpen = true;
     if (tab) drawerTab = tab;
     $('drawer').classList.add('open');
@@ -769,14 +771,31 @@
     </div>`;
   }
 
-  function tabTeam(p) {
-    const t = team(p.id);
+  function tabSetup() {
     return `
       <div class="dr-sec">
         <div class="dr-h">PRESENTING DEVICE</div>
         <label class="sw"><input type="checkbox" id="tgSecrets"${secretsHidden() ? ' checked' : ''}><i class="sw-t" aria-hidden="true"></i>
           <span><b>Hide KEY and SCORE on this device</b><em>Removes those panels (and the K / J shortcuts) so nothing private can show on the projector. Saved on this device only.</em></span></label>
       </div>
+      <div class="dr-sec">
+        <div class="dr-h">PRESENTING</div>
+        <div class="dr-btns row">
+          <button class="btn ghost" data-act="fs">⛶ FULLSCREEN</button>
+          <button class="btn ghost" data-act="projector">⧉ PROJECTOR WINDOW</button>
+          <button class="btn ghost" data-act="keys">? SHORTCUTS</button>
+        </div>
+        <div class="score-note">Shortcuts: K organizer · T timer · F fullscreen · H board · ? help.</div>
+      </div>
+      <div class="dr-sec">
+        <div class="dr-h">DANGER</div>
+        <button class="btn danger" id="btnResetEvent">RESET EVENT…</button>
+      </div>`;
+  }
+
+  function tabTeam(p) {
+    const t = team(p.id);
+    return `
       <div class="dr-sec">
         <div class="dr-h">TEAM ASSIGNMENT · PROBLEM ${esc(numOf(p.id))}</div>
         <label class="fld"><span>PROBLEM NUMBER</span><input id="tmPnum" value="${esc(numOf(p.id))}" maxlength="3" placeholder="${pad2(p.id)}"></label>
@@ -821,7 +840,18 @@
 
   function renderDrawer(keepScroll) {
     const p = cur();
-    if (!p) return;
+    $('drawer').classList.toggle('board-mode', !p);
+    if (!p) {                                               // organizer panel from the problem board
+      if (drawerTab !== 'timer') drawerTab = 'setup';
+      $('drTitle').textContent = 'PROBLEM BOARD';
+      document.querySelectorAll('#drTabs button').forEach(b => {
+        const on = b.dataset.tab === drawerTab;
+        b.classList.toggle('on', on); b.setAttribute('aria-selected', on);
+      });
+      $('drBody').innerHTML = { timer: tabTimer, setup: tabSetup }[drawerTab]();
+      tickTimer();
+      return;
+    }
     const body = $('drBody');
     const top = keepScroll ? body.scrollTop : 0;
     $('drTitle').textContent = `${numOf(p.id)} · ${p.title}`;
@@ -831,7 +861,7 @@
       b.setAttribute('aria-selected', on);
     });
     if (secretsHidden() && isSecretTab(drawerTab)) drawerTab = 'timer';
-    body.innerHTML = { key: tabKey, lock: tabLock, score: tabScore, team: tabTeam, timer: tabTimer }[drawerTab](p);
+    body.innerHTML = { key: tabKey, lock: tabLock, score: tabScore, team: tabTeam, timer: tabTimer, setup: tabSetup }[drawerTab](p);
     body.scrollTop = top;
     tickTimer();
   }
@@ -954,6 +984,7 @@
   $('mkOk').addEventListener('click', closeModals);
   $('btnKeysBoard').addEventListener('click', () => openModal('modalKeys'));
   $('btnFsBoard').addEventListener('click', toggleFs);
+  $('btnOrgBoard').addEventListener('click', () => openDrawer('setup'));
   $('btnProjector').addEventListener('click', openProjector);
 
   function openProjector() {
@@ -1061,6 +1092,12 @@
   });
 
   $('drBody').addEventListener('click', e => {
+    // buttons that work with or without an open problem (SETUP tab, board organizer)
+    if (e.target.id === 'btnResetEvent') { openModal('modalReset'); return; }
+    const gact = e.target.closest('[data-act]');
+    if (gact && ACTIONS[gact.dataset.act]) { ACTIONS[gact.dataset.act](); return; }
+    const tm0 = e.target.closest('[data-t]');
+    if (tm0) { timerCmd(tm0.dataset.t, tm0.dataset.m); return; }
     const p = cur();
     if (!p) return;
     const sc = e.target.closest('[data-sc]');
@@ -1099,6 +1136,7 @@
       }
       return;
     }
+    if (e.target.id === 'btnResetEvent') { openModal('modalReset'); return; }
     const act = e.target.closest('[data-act]');
     if (act && ACTIONS[act.dataset.act]) { ACTIONS[act.dataset.act](); return; }
     const tm = e.target.closest('[data-t]');
@@ -1142,7 +1180,12 @@
     if (k === '?') { openModal('modalKeys'); return; }
     if (k === 'f') { toggleFs(); return; }
     if (k === 'h') { if (inStage) toBoard(); return; }
-    if (!inStage) return;
+    if (!inStage) {                                  // problem board: organizer = timer + setup
+      if (k === 'k' || k === 'j' || k === 'l') { drawerOpen && drawerTab === 'setup' ? closeDrawer() : openDrawer('setup'); }
+      else if (k === 't') { drawerOpen && drawerTab === 'timer' ? closeDrawer() : openDrawer('timer'); }
+      else if (k === ' ') { e.preventDefault(); toggleTimerRun(); }
+      return;
+    }
 
     if (k === 'ArrowRight') { e.preventDefault(); navNext(); }
     else if (k === 'ArrowLeft') { e.preventDefault(); navPrev(); }

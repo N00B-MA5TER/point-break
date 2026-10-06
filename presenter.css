@@ -659,3 +659,6 @@ body.fs .drawer { cursor: default; }
 body.fs .drawer * { cursor: inherit; }
 body.fs .drawer button, body.fs .drawer input, body.fs .drawer textarea { cursor: pointer; }
 body.fs .drawer input[type=text], body.fs .drawer input:not([type]), body.fs .drawer textarea { cursor: text; }
+
+/* organizer panel opened from the problem board: only TIMER and SETUP apply */
+.drawer.board-mode .dr-tabs button:not([data-tab=timer]):not([data-tab=setup]) { display: none; }

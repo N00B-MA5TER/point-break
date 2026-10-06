@@ -492,3 +492,15 @@ body.hide-secrets .dr-tabs .secret { display: none; }
 body.fs .drawer { cursor: default; }
 body.fs .drawer button, body.fs .drawer input, body.fs .drawer textarea { cursor: pointer; }
 body.fs .drawer input:not([type=checkbox]):not([type=number]), body.fs .drawer textarea { cursor: text; }
+
+
+/* locked page */
+.locked { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1rem; padding: 2rem; }
+.lk-ic { font-size: 3rem; }
+.lk-k { font-family: var(--mono); font-weight: 700; font-size: 1rem; letter-spacing: 0.35em; color: var(--acc); }
+.locked h1 { font-weight: 700; font-size: 6rem; line-height: 1; letter-spacing: 0.04em; text-shadow: 0 0 3rem rgba(var(--ring),0.45); }
+.locked p { font-size: 1.6rem; color: var(--dim); max-width: 40rem; line-height: 1.3; }
+.lk-links { display: flex; gap: 2rem; margin-top: 1rem; }
+.lk-links a { font-family: var(--mono); font-size: 0.95rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mute); text-decoration: none; border-bottom: 1px solid var(--line-2); padding-bottom: 0.2rem; }
+.lk-links a:hover { color: #fff; border-bottom-color: #fff; }
+body { overflow: auto; }

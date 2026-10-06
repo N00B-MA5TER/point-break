@@ -34,9 +34,9 @@ window.PB = {
 
   /* Card positions. Labels are what you see on the board; order = which problem sits in each slot.
      (Editing a card's number in the presenter swaps it with whoever holds that number.) */
-  positions: ['01','02','03','04','05','06','07','08','09','10','11','12','14','15'],
-  primaryCount: 12,
-  order: [1, 2, 3, 4, 5, 6, 7, 8, 14, 10, 11, 12, 9, 15],
+  positions: ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18'],
+  primaryCount: 14,
+  order: [1, 2, 3, 4, 5, 6, 7, 8, 14, 10, 11, 12, 16, 17, 9, 15, 18, 19],
 
   judging: {
     categories: [
@@ -190,6 +190,38 @@ window.PB = {
       { k: 'THE ORDER', lead: 'A customer has ordered **2800 finished units**.', sub: 'The order must be delivered in **3 days**. The factory:',
         list: ['Cannot add workers', 'Cannot add machines', 'Can store unfinished units between production stages', 'Cannot store units outside the factory'] },
     ],
+    16: [
+      { k: 'THE BRIDGE', lead: 'A temporary bridge connects two parts of a construction site.', sub: 'The bridge has a **maximum safe load of 10 tonnes** at any given time.' },
+      { k: 'THE VEHICLES', lead: 'Five vehicles are waiting to cross:',
+        table: { head: ['Vehicle', 'Weight', 'How many'], rows: [['Car', '2 tonnes', '2'], ['Delivery Van', '4 tonnes', '2'], ['Truck', '7 tonnes', '1']], hotCols: [1] },
+        foot: 'All five vehicles need to cross the bridge.' },
+      { k: 'THE RULES', lead: 'How the bridge works:',
+        list: ['Several vehicles may be on the bridge **at the same time** — as long as their combined weight never exceeds 10 tonnes', 'The next group may enter only after the previous group has **fully crossed**', 'Vehicles **cannot overtake** each other on the bridge'] },
+    ],
+    17: [
+      { k: 'THE LAB', lead: 'Your college is conducting an important practical examination in a computer lab.',
+        sub: 'There are **30 students** and **30 computers**. The exam begins in **20 minutes**.' },
+      { k: 'THE PREPARATION', lead: 'Before the exam starts, you must prepare the lab.', sub: 'Each computer must be:',
+        list: ['Switched on', 'Connected to the network', 'Able to run the required software', 'Checked before students enter'],
+        foot: 'You have **3 volunteers** available to help prepare the lab.' },
+    ],
+    18: [
+      { k: 'THE DOORS', lead: 'You are **trapped inside a building**.', sub: 'Your team finds three doors:',
+        rows: [ { k: 'A', t: 'Door A — “**SAFETY**”' }, { k: 'B', t: 'Door B — “**EXIT**”' }, { k: 'C', t: 'Door C — **no label**' } ],
+        foot: 'You must choose **one** door.' },
+    ],
+    19: [
+      { k: 'THE BOXES', lead: 'You are **stranded in an isolated location**.', sub: 'You find **five sealed boxes**. You can carry **only two**.' },
+      { k: 'THE LABELS', lead: 'Written on each box is the following:',
+        rows: [
+          { k: 'A', t: '“This box can keep six people alive for three days.”' },
+          { k: 'B', t: '“This box can produce enough heat to keep you warm through the night.”' },
+          { k: 'C', t: '“This box can help you reach another location.”' },
+          { k: 'D', t: '“This box can provide enough light to find your way in darkness.”' },
+          { k: 'E', t: '“This box can help you obtain clean drinking water.”' },
+        ],
+        foot: 'You do **not** know what is physically inside the boxes.' },
+    ],
   },
 
   /* ══════════════════════════════════════════════════════════════
@@ -212,6 +244,10 @@ window.PB = {
     12: [ { k: 'opt', label: 'Option chosen', type: 'choice', options: ['Option A — submit now', 'Option B — attempt the final feature'] } ],
     14: [ { k: 'topics', label: 'Topics prioritized', type: 'multi', options: ['Topics 1–3', 'Topics 4–6', 'Topics 7–8', 'Topics 9–10'] }, { k: 'hours', label: 'Hours per topic', type: 'text' } ],
     3: [ { k: 'plan', label: 'Production plan (units per stage per day)', type: 'text' } ],
+    16: [ { k: 'order', label: 'Crossing order (which vehicles go together)', type: 'text' } ],
+    17: [ { k: 'split', label: 'How the 3 volunteers divide the work', type: 'text' }, { k: 'ready', label: 'How “lab ready” is decided', type: 'text' } ],
+    18: [ { k: 'door', label: 'Door chosen', type: 'choice', options: ['Door A — SAFETY', 'Door B — EXIT', 'Door C — no label'] }, { k: 'info', label: 'Information the decision uses', type: 'text' } ],
+    19: [ { k: 'boxes', label: 'Two boxes chosen', type: 'multi', max: 2, options: ['Box A', 'Box B', 'Box C', 'Box D', 'Box E'] }, { k: 'assume', label: 'Assumptions it depends on', type: 'text' } ],
   },
 
 
@@ -815,5 +851,173 @@ window.PB = {
         ],
       },
     },
+    /* ───────────────────────── 16 · THE BRIDGE ───────────────────────── */
+    {
+      id: 16, kind: 'primary',
+      title: 'THE BRIDGE',
+      skill: 'Constraint reasoning', attacks: 'Priority change',
+      problem: {
+        challenge: { label: 'Your plan must ensure that:', lead: 'Decide the order in which the vehicles should cross the bridge.',
+          items: ['The bridge’s 10-tonne maximum load is never exceeded', 'All five vehicles cross', 'No vehicle is left behind', 'You can explain why your sequence is safe'] },
+      },
+      twist: {
+        lead: 'Just before the vehicles begin crossing, an ambulance arrives.',
+        facts: ['The ambulance weighs **3 tonnes** and is carrying a patient who needs immediate medical attention.', 'The ambulance must cross the bridge **before any other vehicle**.'],
+        blocks: [
+          { t: 'stats', items: [ { n: '3 T', l: 'Ambulance', hot: true }, { n: 'FIRST', l: 'Must cross before any other vehicle', hot: true } ] },
+        ],
+        unchanged: 'The bridge limit has not changed: 10 tonnes at any time, and all five original vehicles still have to cross.',
+        newChallenge: { lead: 'Adapt your crossing plan.', label: 'Your revised plan must:',
+          items: ['Get the ambulance across first', 'Never exceed the bridge’s 10-tonne load limit', 'Still get all five original vehicles across safely'] },
+        challenge: 'Adapt your crossing plan.',
+        recap: 'A 3-tonne ambulance must cross first. The 10-tonne limit and the five original vehicles are unchanged.',
+      },
+      organizer: {
+        core: 'A hard constraint, cumulative weight, and adapting a plan when a priority changes.',
+        tests: [],
+        strong: [
+          'Weights are added up while vehicles are on the bridge together — not checked one by one.',
+          'A 7-tonne truck cannot share the bridge with a 4-tonne van, another 7-tonne vehicle, or two 2-tonne cars.',
+          'After the twist the plan is re-sequenced; the problem is not made impossible.',
+          'The team can explain WHY its groups are safe.',
+        ],
+        accept: ['Any grouping whose total never exceeds 10 tonnes, with the ambulance first and all five original vehicles across.'],
+        reject: ['Sending a group over 10 tonnes “because it is quick”.', 'Dropping a vehicle to make room for the ambulance — all five must still cross.'],
+        notes: [
+          'The statement makes the rule explicit: several vehicles may be on the bridge together, within 10 tonnes; the next group waits until the previous one has fully crossed. Without that rule the weight limit would not matter.',
+          'The emergency changes the sequence but does not make the problem impossible.',
+        ],
+        calc: [
+          { h: 'Valid and invalid combinations (limit 10 t)', lines: [
+            'Truck 7 + Car 2 = 9 ✓', 'Van 4 + Car 2 = 6 ✓', 'Van 4 + Van 4 = 8 ✓', 'Van 4 + Car 2 + Car 2 = 8 ✓', 'Van 4 + Van 4 + Car 2 = 10 ✓',
+            'Truck 7 + Van 4 = 11 ✗', 'Truck 7 + Car 2 + Car 2 = 11 ✗',
+          ]},
+          { h: 'Example plans', lines: [
+            'Before: {Truck + Car} then {Van + Van + Car}  → 2 groups (total 19 t, so at least 2)',
+            'After the twist: {Ambulance + Truck = 10} then {Van + Van + Car = 10} then {Car}  → 3 groups (total 22 t, so at least 3)',
+            'Ambulance + Car = 5 ✓ · Ambulance + Van = 7 ✓ · Ambulance + Truck = 10 ✓',
+          ]},
+        ],
+      },
+    },
+
+    /* ───────────────────────── 17 · THE COMPUTER LAB ───────────────────────── */
+    {
+      id: 17, kind: 'primary',
+      title: 'THE COMPUTER LAB',
+      skill: 'Contingency planning', attacks: 'Assumption: one student = one computer',
+      problem: {
+        challenge: { label: 'Your plan must specify:', lead: 'Create a plan to prepare the lab within the **20-minute** window.',
+          items: ['How the 3 volunteers divide the work', 'How the computers are checked', 'What happens if a computer fails during the preparation', 'How you decide whether the lab is ready for the exam'] },
+      },
+      twist: {
+        lead: 'Just before the students enter, **8 computers fail simultaneously**.',
+        facts: ['No additional computers are immediately available.', 'The exam still begins at the scheduled time.'],
+        blocks: [
+          { t: 'stats', items: [ { n: '30', l: 'Students' }, { n: '22', was: '30', l: 'Working computers', hot: true }, { n: '3', l: 'Volunteers' } ] },
+        ],
+        unchanged: 'You still have 3 volunteers, and nothing else can be brought in.',
+        newChallenge: { lead: 'Adapt your plan.', label: 'Your solution must explain:',
+          items: ['How students will be assigned computers', 'What happens to students whose assigned computers have failed', 'How the 3 volunteers will manage the failures', 'How you will ensure that every student has access to a functioning computer without delaying the exam unnecessarily'] },
+        challenge: 'Adapt your plan.',
+        recap: '8 of the 30 computers fail just before students enter: 22 work, 30 students need one, nothing else is available.',
+      },
+      organizer: {
+        core: 'Systematic preparation, then letting go of the one-student-per-computer assumption.',
+        tests: ['Systematic preparation', 'Division of labour', 'Prioritization', 'Contingency planning'],
+        strong: [
+          'Identify the failed machines quickly.',
+          'Redistribute students to working machines with a clear assignment system.',
+          'Avoid spending all three volunteers on one failed machine.',
+          'Recognize that the objective is 30 students completing the exam, not restoring every computer.',
+        ],
+        accept: [],
+        reject: [],
+        notes: [
+          'The twist fixes “several” at exactly 8 computers so teams cannot argue about severity: 30 students, 22 working computers.',
+          'The twist tests whether the team abandons the one-student / one-computer assumption.',
+          'The statement does not give the exam’s length or say whether it can run in batches — judge the reasoning, and accept any plan that keeps the exam on time and gives every student a working machine.',
+        ],
+        calc: [{ h: 'After the twist', lines: ['30 students − 22 working computers = 8 students without a machine'] }],
+      },
+    },
+
+    /* ───────────────────────── 18 · THE DOOR THAT SHOULD STAY CLOSED ───────────────────────── */
+    {
+      id: 18, kind: 'backup',
+      title: 'THE DOOR THAT SHOULD STAY CLOSED',
+      skill: 'Information reliability', attacks: 'Source of the labels',
+      problem: {
+        challenge: { label: '', lead: 'Choose which door your team will take and explain why.', items: [], foot: 'Your team must decide **what information it will use** to make the decision.' },
+      },
+      twist: {
+        lead: 'You discover that:',
+        quote: 'The labels on Door A and Door B were written by people who became trapped inside the building before you.',
+        facts: ['You do not know who wrote the labels.', 'You do not know why they wrote them.', 'You do not know whether they survived.', 'You do not know whether the labels were correct.'],
+        blocks: [],
+        unchanged: 'The doors have not changed, and you still have to choose one.',
+        newChallenge: { lead: 'Reconsider your decision.', label: 'Are the labels:',
+          items: ['Useful information?', 'Evidence of someone else’s experience?', 'Potentially misleading?', 'Something you should ignore?'],
+          foot: 'Explain whether you would **keep or change** your original choice.' },
+        challenge: 'Reconsider your decision.',
+        recap: 'The “SAFETY” and “EXIT” labels were written by earlier trapped people — who they were and whether they were right is unknown.',
+      },
+      organizer: {
+        core: 'Information versus evidence, and how much confidence it deserves.',
+        tests: [],
+        strong: [
+          'Recognizes that the labels have uncertain reliability.',
+          'Distinguishes information from evidence.',
+          'Reconsiders the confidence placed in the original assumption.',
+          'Avoids treating a label as guaranteed truth.',
+        ],
+        accept: [],
+        reject: [],
+        notes: [
+          'There is NO objectively correct door. This is a BACKUP problem because the final decision stays subjective.',
+          'Judge the reasoning about reliability — not which door they end up choosing.',
+        ],
+        calc: [],
+      },
+    },
+
+    /* ───────────────────────── 19 · THE BOX NOBODY SHOULD OPEN ───────────────────────── */
+    {
+      id: 19, kind: 'backup',
+      title: 'THE BOX NOBODY SHOULD OPEN',
+      skill: 'Interpreting information', attacks: 'What the description actually means',
+      problem: {
+        challenge: { label: 'Explain:', lead: 'Choose the **two boxes** you would carry.',
+          items: ['What you believe each box contains', 'Why you selected those two', 'What assumptions your decision depends on'] },
+      },
+      twist: {
+        lead: 'You are given one additional piece of information:',
+        quote: 'Every description written on the boxes is technically true.',
+        facts: ['However, the description does **not** tell you what is inside the box.', 'It tells you what the box can **cause or enable**.', 'A box described as “can provide light” does not necessarily contain a lamp or flashlight.'],
+        blocks: [],
+        unchanged: 'You can still carry only two boxes, and you still cannot look inside.',
+        newChallenge: { lead: 'Reconsider your selection. You may change your two chosen boxes.', label: 'Explain:',
+          items: ['Which assumptions from your original decision are no longer reliable', 'Which boxes you now consider valuable', 'Why your decision changed or remained the same'] },
+        challenge: 'Reconsider your selection.',
+        recap: 'The descriptions are true, but they describe what a box can cause — not what is inside it.',
+      },
+      organizer: {
+        core: 'What is known, what is inferred and what is assumed.',
+        tests: [],
+        strong: [
+          'The team separates what is explicitly known from what it inferred and what it assumed.',
+          'It explains how the new meaning of the descriptions changed its confidence.',
+          'It does not simply swap boxes at random after the twist.',
+        ],
+        accept: [],
+        reject: [],
+        notes: [
+          'The twist attacks the assumption “the description tells me what is inside.” It actually says what the box can cause or enable.',
+          'There is no objectively correct pair of boxes unless the real contents are defined in advance. This is a BACKUP problem.',
+        ],
+        calc: [],
+      },
+    },
+
   ],
 };

@@ -1,0 +1,4 @@
+# Round 2 is locked: keep its answers and logic out of the public deployment.
+# (Remove these two lines when you set round2Enabled to true.)
+round2-data.js
+round2.js

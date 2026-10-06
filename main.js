@@ -28,6 +28,17 @@
     });
   });
 
+  /* ══ ROUND 2 LOCK (see site-config.js) ══ */
+  if (window.SITE && window.SITE.round2Enabled === false) {
+    document.querySelectorAll('[data-round2]').forEach(a => {
+      a.classList.add('is-locked');
+      a.setAttribute('aria-disabled', 'true');
+      a.setAttribute('title', 'Round 2 is not open yet');
+      a.removeAttribute('href');
+      a.setAttribute('tabindex', '-1');
+    });
+  }
+
   /* ══ FULLSCREEN (button + F key) ══ */
   const fsBtns = [document.getElementById('navFs'), document.getElementById('navFsMobile')].filter(Boolean);
   const canFs = !!(document.documentElement.requestFullscreen);

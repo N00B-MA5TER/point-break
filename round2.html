@@ -111,7 +111,24 @@
     </div>
   </div>
 
-  <script src="round2-data.js"></script>
-  <script src="round2.js"></script>
+  <script src="site-config.js"></script>
+  <script>
+    (function () {
+      var open = !window.SITE || window.SITE.round2Enabled !== false;
+      if (!open) {
+        document.title = 'Point Break — Round 02 · Locked';
+        document.body.className = 't-pre';
+        document.body.innerHTML =
+          '<div class="eclipse" aria-hidden="true"></div>' +
+          '<main class="locked"><div class="lk-ic" aria-hidden="true">🔒</div>' +
+          '<div class="lk-k">ROUND 02 · THE BREAK</div><h1>NOT OPEN YET</h1>' +
+          '<p>Round 2 is only for shortlisted teams, and it opens after Round 1.</p>' +
+          '<div class="lk-links"><a href="index.html">← Event page</a><a href="presenter.html">Round 1</a></div></main>';
+        return;
+      }
+      function load(src, cb) { var s = document.createElement('script'); s.src = src; s.onload = cb; document.body.appendChild(s); }
+      load('round2-data.js', function () { load('round2.js'); });
+    })();
+  </script>
 </body>
 </html>

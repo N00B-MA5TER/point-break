@@ -321,3 +321,11 @@ body > nav, body > section, body > div:not(.eclipse), body > footer { position: 
 .nav-fs[hidden], .nav-mobile-fs[hidden] { display: none; }
 .nav-mobile-fs { background: none; border: none; text-align: left; font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); padding: 0.9rem 0; cursor: pointer; }
 @media (max-width: 720px) { .nav-fs { display: none; } }
+
+
+/* locked Round 2 links */
+.is-locked { opacity: 0.4; pointer-events: none; cursor: not-allowed; filter: grayscale(1); }
+.is-locked::after { content: ' · locked'; font-family: var(--mono); font-size: 0.7em; letter-spacing: 0.12em; text-transform: uppercase; }
+.btn.is-locked::after { content: none; }
+.btn.is-locked .btn-arrow { display: none; }
+.btn.is-locked .btn-text::after { content: ' · locked'; font-family: var(--mono); font-size: 0.75em; letter-spacing: 0.1em; }

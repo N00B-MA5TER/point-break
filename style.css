@@ -329,3 +329,6 @@ body > nav, body > section, body > div:not(.eclipse), body > footer { position: 
 .btn.is-locked::after { content: none; }
 .btn.is-locked .btn-arrow { display: none; }
 .btn.is-locked .btn-text::after { content: ' · locked'; font-family: var(--mono); font-size: 0.75em; letter-spacing: 0.1em; }
+
+.rm-round--2 .rm-core i { border-color: var(--pur); color: var(--pur); }
+.rm-round--2 .rm-twist i { border-color: var(--amb); color: var(--amb); }

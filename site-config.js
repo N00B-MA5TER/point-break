@@ -11,4 +11,4 @@
      2. delete the two lines in .vercelignore (so the answer data is
         uploaded again) and redeploy:  npx vercel deploy --prod --yes
    ───────────────────────────────────────────────────────────── */
-window.SITE = { round2Enabled: false };
+window.SITE = { round2Enabled: true };

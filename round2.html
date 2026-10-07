@@ -13,21 +13,35 @@
 
   <div class="eclipse" aria-hidden="true"></div>
 
-  <div id="app">
-    <!-- header: organizer sees the selectors, the projector sees plain text -->
+  <!-- PROBLEM BOARD -->
+  <section id="boardView" class="view">
+    <header class="bd-top">
+      <div class="brand">
+        <div class="brand-name">POINT <b>BREAK</b></div>
+        <div class="brand-sub">ROUND 02 · THE BREAK · <span id="bdCount">0 / 0 COMPLETE</span></div>
+      </div>
+      <div class="timer-slot" aria-live="off"></div>
+      <div class="bd-actions no-fs">
+        <button class="link" id="btnOrgBoard">Organizer <kbd>K</kbd></button>
+        <button class="link" id="btnProjBoard">Projector window</button>
+        <button class="link" id="btnFsBoard">Fullscreen <kbd>F</kbd></button>
+        <button class="link" id="btnKeysBoard">Keys <kbd>?</kbd></button>
+        <button class="link danger" id="btnResetBoard">Reset round 2</button>
+        <a class="link" href="presenter.html">Round 1</a>
+        <a class="link" href="index.html">Event page</a>
+      </div>
+    </header>
+    <main class="bd-main"><div class="grid" id="grid"></div></main>
+  </section>
+
+  <div id="app" hidden>
     <header class="hd">
       <div class="hd-brand">
         <div class="hd-name">POINT <b>BREAK</b></div>
         <div class="hd-sub">ROUND 02 · THE BREAK</div>
       </div>
 
-      <div class="hd-mid">
-        <div class="hd-sel no-fs">
-          <label><span>TEAM</span><select id="selTeam" aria-label="Team"></select></label>
-          <label><span>PROBLEM</span><select id="selProb" aria-label="Problem"></select></label>
-        </div>
-        <div class="hd-ctx only-fs" id="hdCtx"></div>
-      </div>
+      <div class="hd-mid"><div class="hd-ctx" id="hdCtx"></div></div>
 
       <div class="hd-right">
         <div class="timer-slot" aria-live="off"></div>
@@ -90,7 +104,8 @@
         <li><span><kbd>L</kbd></span><span>Open lifelines</span></li>
         <li><span><kbd>Enter</kbd></span><span>Confirm the lifeline in use</span></li>
         <li><span><kbd>R</kbd></span><span>Reveal reality</span></li>
-        <li><span><kbd>[</kbd> <kbd>]</kbd></span><span>Previous / next team</span></li>
+        <li><span><kbd>[</kbd> <kbd>]</kbd></span><span>Previous / next problem</span></li>
+        <li><span><kbd>H</kbd></span><span>Back to the problem board</span></li>
         <li><span><kbd>K</kbd></span><span>Organizer panel (answers, scores)</span></li>
         <li><span><kbd>F</kbd></span><span>Fullscreen / presentation mode</span></li>
         <li><span><kbd>Esc</kbd></span><span>Close panel · cancel a lifeline</span></li>
@@ -103,7 +118,7 @@
   <div class="modal" id="modalReset" hidden role="alertdialog" aria-modal="true" aria-labelledby="mrTitle">
     <div class="modal-card danger">
       <div class="m-title" id="mrTitle">RESET ALL OF ROUND 2?</div>
-      <p>This permanently clears team names, every team’s progress, lifelines used, scores, notes and any outcomes you typed. It cannot be undone.</p>
+      <p>This permanently clears team names, every problem’s progress, lifelines used, scores, notes and any outcomes you typed. It cannot be undone.</p>
       <div class="m-actions">
         <button class="btn ghost" id="mrCancel">CANCEL</button>
         <button class="btn danger" id="mrOk">YES — RESET EVERYTHING</button>
